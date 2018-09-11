@@ -3,19 +3,19 @@ kind: ReplicationController
 metadata:
   labels:
     app: helloworld
-    version: v2
-  name: helloworld-v2
+    version: v1
+  name: helloworld-v1
 spec:
   replicas: 1
   template:
     metadata:
       labels:
         app: helloworld
-        version: v2
+        version: v1
     spec:
       containers:
-        - image: kelseyhightower/helloworld:v2 
+        - image: "ghuang/helloworld:v1"
           name: helloworld
           ports:
-            - containerPort: 8080
+            - containerPort: 8088
               name: http

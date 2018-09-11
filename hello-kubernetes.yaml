@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-kubernetes
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: hello-kubernetes
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kubernetes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-kubernetes
+  template:
+    metadata:
+      labels:
+        app: hello-kubernetes
+    spec:
+      containers:
+      - name: hello-kubernetes
+        image: ghuang/helloworld:v1
+        ports:
+        - containerPort: 8080
+
+ #---
+ #apiVersion: v1
+ #kind: ReplicationController
+ #metadata:
+ #  labels:
+ #    app: helloworld
+ #    version: v1
+ #  name: helloworld-v1
+ #spec:
+ #  replicas: 1
+ #  template:
+ #    metadata:
+ #      labels:
+ #        app: helloworld
+ #        version: v1
+ #    spec:
+ #      containers:
+ #        - image: "ghuang/helloworld:v1"
+ #          name: helloworld
+ #          ports:
+ #            - containerPort: 8088
+ #              name: http
